@@ -1,7 +1,6 @@
 const express = require('express');
 let books = require("./booksdb.js");
-let isValid = require("./auth_users.js").isValid;
-let users = require("./auth_users.js").users;
+let users = require("./users.js");
 const public_users = express.Router();
 
 
@@ -26,8 +25,10 @@ public_users.post("/register", (req,res) => {
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
-  //Write your code here
-  return res.status(200).json(books);
+  return res.status(200).json({
+    message: "List of all books",
+    books: books
+  });
 });
 
 // Get book details based on ISBN
